@@ -28,7 +28,7 @@ export default defineComponent({
 	},
 	setup() {
 		const isOpen = ref(true)
-		const textInputModel = ref("")
+		const textInputModel = ref("zaeeaz")
 		const secretInputModel = ref("")
 		const selectInputModel = ref("")
 		const autocompleteInputModel = ref("")
@@ -59,6 +59,7 @@ export default defineComponent({
 			placeholder="Placeholder..."
 			v-model="textInputModel"
 			required
+			disabled
 		>
 			<template #icon><LetterIcon class="ml-0.5 mr-2" /></template>
 		</TextInput>
@@ -75,6 +76,7 @@ export default defineComponent({
 			class="input:my-[15px]"
 			v-model:data="selectInputModel"
 			:items="['a', { label: 'b', data: ['array'] }, 'c']"
+			disabled
 		/>
 		<AutocompleteInput
 			label="AutocompleteInput"
@@ -93,6 +95,7 @@ export default defineComponent({
 			class="input:my-[15px]"
 			v-model="phoneInputModel"
 			:prefixes="prefixes"
+			disabled
 		/>
 		<TextAreaInput
 			class="input:my-3"

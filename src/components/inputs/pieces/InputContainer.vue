@@ -4,6 +4,7 @@ import { computed, defineComponent, ref } from "vue"
 export default defineComponent({
 	props: {
 		isFilled: Boolean,
+		isDisabled: Boolean,
 		hasError: Boolean,
 	},
 	emits: ["focusout"],
@@ -15,6 +16,7 @@ export default defineComponent({
 		}
 
 		const borderStyle = computed(() => {
+			if (props.isDisabled) return "border-neutral-300"
 			if (props.hasError) return "border-danger-500"
 			if (props.isFilled) return "border-nav-black"
 			return "border-neutral-300"
@@ -36,6 +38,7 @@ export default defineComponent({
 			focus-within:outline focus-within:outline-brand-primary 
 			focus-within:outline-2`,
 			borderStyle,
+			isDisabled ? 'bg-neutral-0' : '',
 		]"
 		@focusout="handleFocusOut"
 		ref="htmlInputContainer"

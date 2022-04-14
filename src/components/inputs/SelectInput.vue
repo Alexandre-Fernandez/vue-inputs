@@ -78,9 +78,14 @@ export default defineComponent({
 		<InputContainer
 			class="rounded-button"
 			:is-filled="!!data || data === 0"
+			:is-disabled="disabled"
 		>
 			<InputItem
-				class="disabled:bg-white"
+				:class="[
+					disabled
+						? 'disabled:bg-neutral-0 disabled:text-secondary'
+						: 'disabled:white',
+				]"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
@@ -93,6 +98,7 @@ export default defineComponent({
 					'self-stretch',
 					isOpen ? 'rotate-180' : 'translate-y-0.5',
 				]"
+				:disabled="disabled"
 				@mousedown="handleChevronClick"
 			>
 				<ChevronDown />

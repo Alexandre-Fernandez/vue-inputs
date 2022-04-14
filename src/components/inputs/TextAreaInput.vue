@@ -31,13 +31,18 @@ export default defineComponent({
 		<InputLabel v-if="label" :required="required" :for="id">
 			{{ label }}
 		</InputLabel>
-		<InputContainer class="rounded-lg" :is-filled="!!modelValue">
+		<InputContainer
+			class="rounded-lg"
+			:is-filled="!!modelValue"
+			:is-disabled="disabled"
+		>
 			<InputItem
-				class="resize-none"
+				class="resize-none disabled:bg-neutral-0 disabled:text-secondary"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
 				:value="modelValue"
+				:disabled="disabled"
 				@input="updateModelValue"
 				is-textarea
 			/>

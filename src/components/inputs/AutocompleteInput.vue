@@ -42,6 +42,7 @@ export default defineComponent({
 		)
 
 		const handleInputValueChange = (e: Event) => {
+			if (props.disabled) return
 			const value = (e.target as HTMLInputElement).value
 			if (value && props.items?.length > 0) isOpen.value = true
 			else isOpen.value = false
@@ -79,15 +80,18 @@ export default defineComponent({
 		<InputContainer
 			class="rounded-button"
 			:is-filled="!!modelValue"
+			:is-disabled="disabled"
 			ref="htmlInputContainer"
 			@focusout="closeList"
 		>
 			<slot name="icon"></slot>
 			<InputItem
+				class="disabled:bg-neutral-0 disabled:text-secondary"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
 				:value="modelValue"
+				:disabled="disabled"
 				@keydown.enter="handleEnterDown"
 				@input="handleInputValueChange"
 			/>

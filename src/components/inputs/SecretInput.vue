@@ -36,13 +36,19 @@ export default defineComponent({
 		<InputLabel v-if="label" :required="required" :for="id">
 			{{ label }}
 		</InputLabel>
-		<InputContainer class="rounded-button" :is-filled="!!modelValue">
+		<InputContainer
+			class="rounded-button"
+			:is-filled="!!modelValue"
+			:is-disabled="disabled"
+		>
 			<InputItem
+				class="disabled:bg-neutral-0 disabled:text-secondary"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
 				:type="isTextVisible ? 'text' : 'password'"
 				:value="modelValue"
+				:disabled="disabled"
 				@input="updateModelValue"
 			/>
 			<button

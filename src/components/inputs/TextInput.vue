@@ -37,18 +37,24 @@ export default defineComponent({
 		<InputLabel v-if="label" :required="required" :for="id">
 			{{ label }}
 		</InputLabel>
-		<InputContainer class="rounded-button" :is-filled="!!modelValue">
+		<InputContainer
+			class="rounded-button"
+			:is-filled="!!modelValue"
+			:is-disabled="disabled"
+		>
 			<slot name="icon"></slot>
 			<InputItem
+				class="disabled:bg-neutral-0 disabled:text-secondary"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
 				:value="modelValue"
+				:disabled="disabled"
 				@input="updateModelValue"
 			/>
 		</InputContainer>
 		<InputErrors
-			v-if="errors.length > 0"
+			v-if="!disabled && errors.length > 0"
 			class="pl-4 pt-2"
 			:errors="errors"
 		/>

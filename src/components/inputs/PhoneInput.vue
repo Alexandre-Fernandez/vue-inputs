@@ -128,6 +128,7 @@ export default defineComponent({
 			:is-filled="
 				(modelValue?.length || 0) > currentPrefixItem.value.length
 			"
+			:is-disabled="disabled"
 		>
 			<p class="pl-0.5">{{ currentPrefixItem.code }}</p>
 			<button
@@ -136,16 +137,22 @@ export default defineComponent({
 					'self-stretch ml-2.5 mr-4',
 					isOpen ? 'rotate-180' : 'translate-y-0.5',
 				]"
+				:disabled="disabled"
 				@mousedown="handleChevronClick"
 			>
 				<ChevronDown />
 			</button>
 			<InputItem
-				class="disabled:bg-white"
+				:class="[
+					disabled
+						? 'disabled:bg-neutral-0 disabled:text-secondary'
+						: 'disabled:black',
+				]"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
 				:value="modelValue"
+				:disabled="disabled"
 				@input="(handleInputChange as any)"
 			/>
 			<ListBox
