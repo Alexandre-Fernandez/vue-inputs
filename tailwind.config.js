@@ -65,8 +65,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				"check-box": "url('@/assets/img/icons/checkbox.svg')",
-				"check-box-checked":
-					"url('@/assets/img/icons/checkbox-checked.svg')",
+				checked: "url('@/assets/icons/checked.svg')",
 				"purple-radiant": "url('@/assets/img/background.png')",
 			},
 		},

@@ -11,6 +11,7 @@ import PhoneInput from "./components/inputs/PhoneInput.vue"
 import prefixes from "./assets/prefixes.json"
 import TextAreaInput from "./components/inputs/TextAreaInput.vue"
 import CounterInput from "./components/inputs/CounterInput.vue"
+import CheckboxInput from "./components/inputs/CheckboxInput.vue"
 
 // bg-[#282828]
 export default defineComponent({
@@ -25,16 +26,18 @@ export default defineComponent({
 		PhoneInput,
 		TextAreaInput,
 		CounterInput,
+		CheckboxInput,
 	},
 	setup() {
 		const isOpen = ref(true)
-		const textInputModel = ref("zaeeaz")
+		const textInputModel = ref("")
 		const secretInputModel = ref("")
 		const selectInputModel = ref("")
 		const autocompleteInputModel = ref("")
 		const phoneInputModel = ref("")
 		const textAreaInputModel = ref("")
 		const counterInputModel = ref("")
+		const checkboxInputModel = ref(false)
 
 		return {
 			isOpen,
@@ -46,6 +49,7 @@ export default defineComponent({
 			prefixes,
 			textAreaInputModel,
 			counterInputModel,
+			checkboxInputModel,
 		}
 	},
 })
@@ -108,6 +112,7 @@ export default defineComponent({
 			v-model="counterInputModel"
 			:min-value="12"
 		/>
+		<CheckboxInput v-model="checkboxInputModel" label="CheckboxInput" />
 	</form>
 </template>
 
