@@ -1,12 +1,12 @@
 <script lang="ts">
-import useInputUpdateModel from "@/composables/input/useInputUpdateModel"
+import useUpdateModel from "@/composables/input/useUpdateModel"
 import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	props: { modelValue: String, isTextarea: Boolean },
 	setup(props, { emit }) {
 		const htmlComponent = ref<HTMLInputElement>()
-		const updateModelValue = useInputUpdateModel(emit)
+		const updateModelValue = useUpdateModel(emit)
 		const handleEnterDown = () => htmlComponent.value?.blur()
 
 		return { updateModelValue, handleEnterDown, htmlComponent }

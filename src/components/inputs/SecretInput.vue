@@ -7,7 +7,7 @@ import InputItem from "./pieces/InputItem.vue"
 import props from "./props"
 import EyeIcon from "../icons/EyeIcon.vue"
 import StruckoutEyeIcon from "../icons/StruckoutEyeIcon.vue"
-import useInputUpdateModel from "@/composables/input/useInputUpdateModel"
+import useUpdateModel from "@/composables/input/useUpdateModel"
 
 export default defineComponent({
 	components: {
@@ -24,7 +24,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		const id = useUniqueId()
 		const isTextVisible = ref(false)
-		const updateModelValue = useInputUpdateModel(emit)
+		const updateModelValue = useUpdateModel(emit)
 
 		return { id, isTextVisible, updateModelValue }
 	},

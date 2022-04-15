@@ -5,7 +5,7 @@ import InputLabel from "./pieces/InputLabel.vue"
 import InputContainer from "./pieces/InputContainer.vue"
 import InputItem from "./pieces/InputItem.vue"
 import props from "./props"
-import useInputUpdateModel from "@/composables/input/useInputUpdateModel"
+import useUpdateModel from "@/composables/input/useUpdateModel"
 import InputErrors from "./pieces/InputErrors.vue"
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
 	},
 	setup(props, { emit }) {
 		const id = useUniqueId()
-		const updateModelValue = useInputUpdateModel(emit)
+		const updateModelValue = useUpdateModel(emit)
 
 		return { id, updateModelValue }
 	},
