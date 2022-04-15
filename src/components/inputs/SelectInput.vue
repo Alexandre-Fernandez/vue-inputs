@@ -7,9 +7,9 @@ import InputItem from "./pieces/InputItem.vue"
 import props from "./props"
 import ChevronDown from "../icons/ChevronDownIcon.vue"
 import ListBox from "../boxes/ListBox/ListBox.vue"
-import useSelectItemList, {
-	type SelectItem,
-} from "@/composables/input/useSelectItemList"
+import useListItemProps, {
+	UnformattedListItemProp,
+} from "@/composables/input/useListItemProps"
 import type { ListItemProp } from "../boxes/ListBox/types"
 
 export default defineComponent({
@@ -22,29 +22,27 @@ export default defineComponent({
 	},
 	props: {
 		...props,
+		modelValue: String,
 		items: {
 			default: [],
-			type: Array as PropType<SelectItem[]>,
+			type: Array as PropType<UnformattedListItemProp[]>,
 		},
-		data: undefined as unknown as PropType<any>, // v-model:data
+		itemData: undefined as unknown as PropType<any>, // v-model:itemData
 		initialItemIndex: Number,
 	},
 	setup(props, { emit }) {
 		const id = useUniqueId()
 		const isOpen = ref(false)
 
-		const { label: inputValue, listItemProps } = useSelectItemList(
+		const listItemProps = useListItemProps(
 			props.items,
-			props.initialItemIndex != null
-				? props.items?.[props.initialItemIndex] || ""
-				: "",
-			data => emit("update:data", data)
+			props.modelValue || ""
 		)
 
 		const handleItemSelect = (item: ListItemProp) => {
 			isOpen.value = false
-			inputValue.value = item.label
-			emit("update:data", item.data)
+			emit("update:modelValue", item.label)
+			emit("update:itemData", item.data)
 		}
 
 		const handleClickOutside = () => (isOpen.value = false)
@@ -60,7 +58,6 @@ export default defineComponent({
 		return {
 			id,
 			isOpen,
-			inputValue,
 			listItemProps,
 			handleItemSelect,
 			handleClickOutside,
@@ -77,7 +74,7 @@ export default defineComponent({
 		</InputLabel>
 		<InputContainer
 			class="rounded-button"
-			:is-filled="!!data || data === 0"
+			:is-filled="!!itemData || itemData === 0"
 			:is-disabled="disabled"
 		>
 			<InputItem
@@ -89,7 +86,7 @@ export default defineComponent({
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
-				:value="inputValue"
+				:value="modelValue"
 				disabled
 			/>
 			<button
