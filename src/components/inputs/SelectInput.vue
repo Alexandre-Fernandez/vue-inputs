@@ -23,12 +23,11 @@ export default defineComponent({
 	props: {
 		...props,
 		modelValue: String,
+		itemData: undefined as unknown as PropType<any>, // v-model:itemData
 		items: {
 			default: [],
 			type: Array as PropType<UnformattedListItemProp[]>,
 		},
-		itemData: undefined as unknown as PropType<any>, // v-model:itemData
-		initialItemIndex: Number,
 	},
 	setup(props, { emit }) {
 		const id = useUniqueId()

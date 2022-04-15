@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent, Fragment, PropType, ref } from "vue"
+import { computed, ComputedRef, defineComponent, PropType, ref } from "vue"
 import useUniqueId from "@/composables/useUniqueId"
 import InputLabel from "./pieces/InputLabel.vue"
 import InputContainer from "./pieces/InputContainer.vue"
@@ -8,6 +8,9 @@ import props from "./props"
 import ListBox from "../boxes/ListBox/ListBox.vue"
 import type { ListItemProp } from "../boxes/ListBox/types"
 import LoadingSpinnerIcon from "../icons/LoadingSpinnerIcon.vue"
+import useListItemProps, {
+	UnformattedListItemProp,
+} from "@/composables/input/useListItemProps"
 
 export default defineComponent({
 	components: {
@@ -20,10 +23,11 @@ export default defineComponent({
 	props: {
 		...props,
 		modelValue: String,
+		itemData: undefined as unknown as PropType<any>, // v-model:itemData
 		isLoading: Boolean,
 		items: {
 			default: [],
-			type: Array as PropType<string[]>,
+			type: Array as PropType<UnformattedListItemProp[]>,
 		},
 	},
 	setup(props, { emit }) {
@@ -31,14 +35,8 @@ export default defineComponent({
 		const id = useUniqueId()
 		const isOpen = ref(false)
 
-		const listItemProps = computed(() =>
-			props.items.map(
-				(item): ListItemProp => ({
-					label: item,
-					data: item,
-					isSelected: item === props.modelValue,
-				})
-			)
+		const listItemProps: ComputedRef<ListItemProp<any>[]> = computed(() =>
+			useListItemProps(props.items, props.modelValue || "")
 		)
 
 		const handleInputValueChange = (e: Event) => {
@@ -47,15 +45,21 @@ export default defineComponent({
 			if (value && props.items?.length > 0) isOpen.value = true
 			else isOpen.value = false
 			emit("update:modelValue", value ?? "")
+			emit(
+				"update:itemData",
+				listItemProps.value.find(item => item.label === value)?.data
+			)
 		}
 		const handleEnterDown = () => {
 			isOpen.value = false
 			emit("update:modelValue", listItemProps.value?.[0].label)
+			emit("update:itemData", listItemProps.value?.[0].data)
 		}
 		const closeList = () => (isOpen.value = false)
 		const handleItemSelect = (item: ListItemProp) => {
 			isOpen.value = false
 			emit("update:modelValue", item.label)
+			emit("update:itemData", item.data)
 		}
 
 		return {
@@ -79,7 +83,7 @@ export default defineComponent({
 		</InputLabel>
 		<InputContainer
 			class="rounded-button"
-			:is-filled="!!modelValue"
+			:is-filled="!!itemData || itemData === 0"
 			:is-disabled="disabled"
 			ref="htmlInputContainer"
 			@focusout="closeList"

@@ -36,15 +36,16 @@ export default defineComponent({
 			label: "",
 			value: "" as any,
 		})
-		const autocompleteInputModel = ref("")
+		const autocompleteInputModel = ref({
+			label: "",
+			value: "" as any,
+		})
 		const phoneInputModel = ref("")
 		const textAreaInputModel = ref("")
 		const counterInputModel = ref("")
 		const checkboxInputModel = ref(false)
-		const log = () => console.log("log")
 
 		return {
-			log,
 			isOpen,
 			textInputModel,
 			secretInputModel,
@@ -95,9 +96,13 @@ export default defineComponent({
 			label="AutocompleteInput"
 			placeholder="Type something..."
 			class="input:my-[15px]"
-			v-model="autocompleteInputModel"
-			:items="['abc', 'def', 'ghi']"
-			@keyup="log"
+			v-model="autocompleteInputModel.label"
+			v-model:itemData="autocompleteInputModel.value"
+			:items="[
+				'abc',
+				{ label: 'def', data: ['array'] },
+				{ label: 'ghi', data: null },
+			]"
 		>
 			<template #icon>
 				<SearchIcon class="ml-0.5 mr-2.5 scale-[1.15]" />
@@ -123,7 +128,6 @@ export default defineComponent({
 			:min-value="12"
 		/>
 		<CheckboxInput v-model="checkboxInputModel" label="CheckboxInput" />
-		{{ selectInputModel }}
 	</form>
 </template>
 
