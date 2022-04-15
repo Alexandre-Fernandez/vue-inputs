@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue"
+import { computed, defineComponent, PropType, ref } from "vue"
 import useUniqueId from "@/composables/useUniqueId"
 import InputLabel from "./pieces/InputLabel.vue"
 import InputContainer from "./pieces/InputContainer.vue"
@@ -34,9 +34,8 @@ export default defineComponent({
 		const id = useUniqueId()
 		const isOpen = ref(false)
 
-		const listItemProps = useListItemProps(
-			props.items,
-			props.modelValue || ""
+		const listItemProps = computed(() =>
+			useListItemProps(props.items, props.modelValue || "")
 		)
 
 		const handleItemSelect = (item: ListItemProp) => {
