@@ -79,7 +79,7 @@ export default defineComponent({
 				:class="[
 					disabled
 						? 'disabled:bg-neutral-0 disabled:text-secondary'
-						: 'disabled:white',
+						: 'disabled:bg-white',
 				]"
 				:placeholder="placeholder"
 				:required="required"
