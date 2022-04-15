@@ -12,6 +12,7 @@ import prefixes from "./assets/prefixes.json"
 import TextAreaInput from "./components/inputs/TextAreaInput.vue"
 import CounterInput from "./components/inputs/CounterInput.vue"
 import CheckboxInput from "./components/inputs/CheckboxInput.vue"
+import DatepickerInput from "./components/inputs/DatepickerInput.vue"
 
 // bg-[#282828]
 export default defineComponent({
@@ -27,6 +28,7 @@ export default defineComponent({
 		TextAreaInput,
 		CounterInput,
 		CheckboxInput,
+		DatepickerInput,
 	},
 	setup() {
 		const isOpen = ref(true)
@@ -69,7 +71,6 @@ export default defineComponent({
 			placeholder="Placeholder..."
 			v-model="textInputModel"
 			required
-			disabled
 		>
 			<template #icon><LetterIcon class="ml-0.5 mr-2" /></template>
 		</TextInput>
@@ -114,7 +115,6 @@ export default defineComponent({
 			class="input:my-[15px]"
 			v-model="phoneInputModel"
 			:prefixes="prefixes"
-			disabled
 		/>
 		<TextAreaInput
 			class="input:my-3"
@@ -128,6 +128,7 @@ export default defineComponent({
 			:min-value="12"
 		/>
 		<CheckboxInput v-model="checkboxInputModel" label="CheckboxInput" />
+		<DatepickerInput class="input:py-5" />
 	</form>
 </template>
 
