@@ -33,7 +33,12 @@ export default defineComponent({
 
 <template>
 	<div>
-		<InputLabel v-if="label" :required="required" :for="id">
+		<InputLabel
+			v-if="label"
+			:required="required"
+			:for="id"
+			:is-disabled="disabled"
+		>
 			{{ label }}
 		</InputLabel>
 		<InputContainer
