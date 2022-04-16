@@ -13,6 +13,7 @@ import TextAreaInput from "./components/inputs/TextAreaInput.vue"
 import CounterInput from "./components/inputs/CounterInput.vue"
 import CheckboxInput from "./components/inputs/CheckboxInput.vue"
 import DatepickerInput from "./components/inputs/DatepickerInput.vue"
+import NumberInput from "./components/inputs/NumberInput.vue"
 
 // bg-[#282828]
 export default defineComponent({
@@ -29,6 +30,7 @@ export default defineComponent({
 		CounterInput,
 		CheckboxInput,
 		DatepickerInput,
+		NumberInput,
 	},
 	setup() {
 		const isOpen = ref(true)
@@ -46,7 +48,8 @@ export default defineComponent({
 		const textAreaInputModel = ref("")
 		const counterInputModel = ref("")
 		const checkboxInputModel = ref(false)
-		const datepickerInputModel = ref()
+		const datepickerInputModel = ref(null)
+		const numberInputModel = ref("")
 
 		return {
 			isOpen,
@@ -60,6 +63,7 @@ export default defineComponent({
 			counterInputModel,
 			checkboxInputModel,
 			datepickerInputModel,
+			numberInputModel,
 		}
 	},
 })
@@ -135,6 +139,13 @@ export default defineComponent({
 			label="DatepickerInput"
 			placeholder="Placeholder..."
 			v-model="datepickerInputModel"
+		/>
+		<NumberInput
+			class="input:my-[15px]"
+			label="NumberInput"
+			placeholder="Placeholder..."
+			v-model="numberInputModel"
+			unit="%"
 		/>
 	</form>
 </template>
