@@ -160,6 +160,7 @@ export default defineComponent({
 /* dp__main */
 .dp__main {
 	width: 100%;
+	font-family: inherit;
 }
 
 /* dp__input */
