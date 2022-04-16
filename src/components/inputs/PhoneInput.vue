@@ -83,9 +83,17 @@ export default defineComponent({
 			const cur = props.modelValue || ""
 			if (
 				e.inputType !== "deleteContentBackward" &&
-				e.inputType !== "deleteContentForward"
+				e.inputType !== "deleteContentForward" &&
+				e.data
 			) {
-				digits.has(e.data!) && emit("update:modelValue", cur + e.data)
+				let textToAdd = e.data
+				for (const char of e.data) {
+					if (!digits.has(char)) {
+						textToAdd = ""
+						break
+					}
+				}
+				emit("update:modelValue", cur + textToAdd)
 			} else if (input.value.substring(0, prefix.length) === prefix) {
 				emit("update:modelValue", input.value)
 			} else {
