@@ -46,6 +46,7 @@ export default defineComponent({
 		const textAreaInputModel = ref("")
 		const counterInputModel = ref("")
 		const checkboxInputModel = ref(false)
+		const datepickerInputModel = ref()
 
 		return {
 			isOpen,
@@ -58,6 +59,7 @@ export default defineComponent({
 			textAreaInputModel,
 			counterInputModel,
 			checkboxInputModel,
+			datepickerInputModel,
 		}
 	},
 })
@@ -128,7 +130,12 @@ export default defineComponent({
 			:min-value="12"
 		/>
 		<CheckboxInput v-model="checkboxInputModel" label="CheckboxInput" />
-		<DatepickerInput class="input:py-5" />
+		<DatepickerInput
+			class="input:my-[15px]"
+			label="DatepickerInput"
+			placeholder="Placeholder..."
+			v-model="datepickerInputModel"
+		/>
 	</form>
 </template>
 

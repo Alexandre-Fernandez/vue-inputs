@@ -1,45 +1,118 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import { defineComponent, PropType, ref } from "vue"
 import Datepicker from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
+import InputLabel from "./pieces/InputLabel.vue"
+import props from "./props"
+import useUniqueId from "@/composables/useUniqueId"
+import InputErrors from "./pieces/InputErrors.vue"
+import DumbInputContainer from "./pieces/DumbInputContainer.vue"
 
+type SingleDatePicker = Date | string
+type MultiDatePicker = Date[] | string[]
+type MonthPicker = { month: number | string; year: number | string }
+type WeekPicker = [Date, Date] | [string, string]
+type TimePicker = {
+	hours: number | string
+	minutes: number | string
+	seconds?: number | string
+}
+type RangePicker = [Date, Date] | [string | string]
+type MonthRangePicker = { month: number | string; year: number | string }[]
+type TimeRangePicker = {
+	hours: number | string
+	minutes: number | string
+	seconds?: number | string
+}[]
+
+export type DatePicker =
+	| SingleDatePicker
+	| MultiDatePicker
+	| MonthPicker
+	| WeekPicker
+	| TimePicker
+	| RangePicker
+	| MonthRangePicker
+	| TimeRangePicker
 export default defineComponent({
-	components: { Datepicker },
-	props: {
-		placeholder: String,
+	components: {
+		Datepicker,
+		InputLabel,
+		InputErrors,
+		DumbInputContainer,
 	},
-	setup() {
-		const date = ref()
+	props: {
+		...props,
+		modelValue: {
+			default: null,
+			type: Object as PropType<DatePicker>,
+		},
+		errors: {
+			default: [],
+			type: Array as PropType<string[]>,
+		},
+	},
+	setup(props, { emit }) {
+		const id = useUniqueId()
+		const handleChange = (value: any) => emit("update:modelValue", value)
+		const isOpen = ref(false)
 
 		return {
-			date,
+			id,
+			handleChange,
+			isOpen,
 		}
 	},
 })
 </script>
 
 <template>
-	<Datepicker
-		v-model="date"
-		:placeholder="placeholder ? placeholder : 'Date'"
-		:style="
-			placeholder
-				? '--placeholder-color: #828282'
-				: '--placeholder-color: rgba(0, 0, 0, 0)'
-		"
-	/>
+	<div>
+		<InputLabel
+			v-if="label"
+			:required="required"
+			:for="`dp-input-${id}`"
+			:is-disabled="disabled"
+		>
+			{{ label }}
+		</InputLabel>
+		<DumbInputContainer
+			class="rounded-button"
+			:is-focused="isOpen"
+			:is-filled="!!modelValue"
+			:is-disabled="disabled"
+		>
+			<slot name="icon"></slot>
+			<Datepicker
+				v-bind="$attrs"
+				:uid="id"
+				:modelValue="modelValue"
+				:required="required"
+				:disabled="disabled"
+				:placeholder="placeholder"
+				@update:model-value="handleChange"
+				@open="() => (isOpen = true)"
+				@closed="() => (isOpen = false)"
+			/>
+		</DumbInputContainer>
+		<InputErrors
+			v-if="!disabled && errors.length > 0"
+			class="pl-4 pt-2"
+			:errors="errors"
+		/>
+	</div>
 </template>
 
 <style>
+/* General */
+
 /* root */
 :root {
 	--white: #fff;
 	--neutral-0: #f9f9f9;
 	--neutral-300: #d1d5db;
-	--brand-primary: #502ebf;
 	--brand-tertiary: #ff4b0e;
 	--danger-500: #ef4444;
-	--nav-black: #040c4e;
 	--primary-100: #040c4e;
 	--secondary: #828282;
 	--success-500: #22c55e;
@@ -72,6 +145,37 @@ export default defineComponent({
 	--dp-tooltip-color: var(--neutral-0);
 	--dp-disabled-color-text: var(--neutral-300);
 }
+/*     Input */
+
+/* dp__main */
+.dp__main {
+	width: 100%;
+}
+
+/* dp__input */
+.dp__input {
+	border-radius: 0;
+	border: none;
+	padding: 0;
+}
+.dp__input::placeholder {
+	color: var(--secondary);
+	font-style: italic;
+	opacity: 1 !important;
+}
+.dp__input:disabled {
+	background-color: var(--neutral-0);
+	color: var(--secondary);
+}
+
+/* dp__input_icon */
+.dp__input_icon {
+	display: none;
+}
+.dp__input_icon_pad {
+	padding-left: 0;
+}
+/*     Calendar */
 
 /* dp__menu */
 .dp__menu {
@@ -80,32 +184,31 @@ export default defineComponent({
 	box-shadow: 0px 2px 8px rgba(7, 25, 61, 0.2);
 }
 
-/*     Input */
-
-/* dp__input */
-.dp__input {
-	padding-left: 42px;
-	background-color: var(--white);
-	border: 1px solid var(--neutral-300);
-	border-radius: 40px;
-	color: var(--primary-100);
-}
-.dp__input::placeholder {
-	color: var(--placeholder-color);
-	font-style: italic;
-}
-.dp__input.dp__pointer:not(:placeholder-shown) {
-	border: 1px solid var(--nav-black);
+/* dp__calendar_header_separator */
+.dp__calendar_header_separator {
+	display: none;
 }
 
-.dp__input_icon {
-	left: 4px;
+/* dp__active_date */
+.dp__active_date {
+	border-radius: 50%;
 }
 
-/* dp__input_focus */
-.dp__input_focus {
-	border-color: var(--neutral-300);
-	outline: 2px solid var(--brand-primary);
+/* dp__date_hover */
+.dp__date_hover {
+	border-radius: 50%;
+}
+
+/* dp__today */
+.dp__today {
+	background-color: var(--neutral-0);
+	border: 0;
+	font-weight: 700;
+	border-radius: 50%;
+}
+.dp__today.dp__active_date {
+	background-color: var(--brand-tertiary);
+	border: 0;
 }
 /*     Buttons */
 
@@ -146,33 +249,5 @@ export default defineComponent({
 .dp__cancel {
 	color: var(--primary-100);
 	border: 1px solid var(--primary-100);
-}
-/*     Calendar */
-
-/* dp__calendar_header_separator */
-.dp__calendar_header_separator {
-	display: none;
-}
-
-/* dp__active_date */
-.dp__active_date {
-	border-radius: 50%;
-}
-
-/* dp__date_hover */
-.dp__date_hover {
-	border-radius: 50%;
-}
-
-/* dp__today */
-.dp__today {
-	background-color: var(--neutral-0);
-	border: 0;
-	font-weight: 700;
-	border-radius: 50%;
-}
-.dp__today.dp__active_date {
-	background-color: var(--brand-tertiary);
-	border: 0;
 }
 </style>
