@@ -101,7 +101,7 @@ export default defineComponent({
 				:disabled="disabled"
 				@input="(handleInputChange as any)"
 			/>
-			<p v-if="unit" class="inline-block">{{ unit }}</p>
+			<p v-if="unit" class="inline-block select-none">{{ unit }}</p>
 		</InputContainer>
 		<InputErrors
 			v-if="!disabled && errors.length > 0"
