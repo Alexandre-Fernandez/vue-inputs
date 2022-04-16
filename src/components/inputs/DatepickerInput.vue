@@ -54,8 +54,8 @@ export default defineComponent({
 	},
 	setup(props, { emit }) {
 		const id = useUniqueId()
-		const handleChange = (value: any) => emit("update:modelValue", value)
 		const isOpen = ref(false)
+		const handleChange = (value: any) => emit("update:modelValue", value)
 
 		return {
 			id,
