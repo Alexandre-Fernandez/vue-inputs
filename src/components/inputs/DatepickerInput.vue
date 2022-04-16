@@ -1,12 +1,14 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue"
-import Datepicker from "@vuepic/vue-datepicker"
 import "@vuepic/vue-datepicker/dist/main.css"
+import Datepicker from "@vuepic/vue-datepicker"
 import InputLabel from "./pieces/InputLabel.vue"
 import props from "./props"
 import useUniqueId from "@/composables/useUniqueId"
 import InputErrors from "./pieces/InputErrors.vue"
 import DumbInputContainer from "./pieces/DumbInputContainer.vue"
+
+// TODO: style this component from scratch instead of overwriting .../main.css
 
 export type SingleDatePicker = null | Date | string
 export type MultiDatePicker = null | Date[] | string[]
