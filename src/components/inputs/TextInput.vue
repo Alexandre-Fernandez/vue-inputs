@@ -22,6 +22,8 @@ export default defineComponent({
 			default: [],
 			type: Array as PropType<string[]>,
 		},
+		type: String,
+		inputmode: String,
 	},
 	setup(props, { emit }) {
 		const id = useUniqueId()
@@ -55,6 +57,8 @@ export default defineComponent({
 				:id="id"
 				:value="modelValue"
 				:disabled="disabled"
+				:type="type"
+				:inputmode="inputmode"
 				@input="updateModelValue"
 			/>
 		</InputContainer>

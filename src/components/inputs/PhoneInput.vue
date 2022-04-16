@@ -153,6 +153,7 @@ export default defineComponent({
 						? 'disabled:bg-neutral-0 disabled:text-secondary'
 						: 'disabled:black',
 				]"
+				inputmode="tel"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"
