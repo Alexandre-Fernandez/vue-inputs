@@ -46,6 +46,7 @@ export default defineComponent({
 			/>
 		</div>
 		<label
+			v-if="label"
 			:class="['pl-2 select-none', disabled ? '' : 'cursor-pointer']"
 			:for="id"
 		>
