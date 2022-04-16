@@ -8,24 +8,34 @@ import useUniqueId from "@/composables/useUniqueId"
 import InputErrors from "./pieces/InputErrors.vue"
 import DumbInputContainer from "./pieces/DumbInputContainer.vue"
 
-type SingleDatePicker = Date | string
-type MultiDatePicker = Date[] | string[]
-type MonthPicker = { month: number | string; year: number | string }
-type WeekPicker = [Date, Date] | [string, string]
-type TimePicker = {
+export type SingleDatePicker = null | Date | string
+export type MultiDatePicker = null | Date[] | string[]
+export type RangePicker = null | [Date, Date] | [string | string]
+export type MonthRangePicker =
+	| null
+	| {
+			month: number | string
+			year: number | string
+	  }[]
+export type TimeRangePicker =
+	| null
+	| {
+			hours: number | string
+			minutes: number | string
+			seconds?: number | string
+	  }[]
+export type MonthPicker = null | {
+	month: number | string
+	year: number | string
+}
+export type WeekPicker = null | [Date, Date] | [string, string]
+export type TimePicker = null | {
 	hours: number | string
 	minutes: number | string
 	seconds?: number | string
 }
-type RangePicker = [Date, Date] | [string | string]
-type MonthRangePicker = { month: number | string; year: number | string }[]
-type TimeRangePicker = {
-	hours: number | string
-	minutes: number | string
-	seconds?: number | string
-}[]
 
-export type DatePicker =
+type DatePicker =
 	| SingleDatePicker
 	| MultiDatePicker
 	| MonthPicker
