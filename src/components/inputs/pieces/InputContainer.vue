@@ -1,4 +1,5 @@
 <script lang="ts">
+import useInputContainerStyle from "@/composables/input/useInputContainerStyle"
 import { computed, defineComponent, ref } from "vue"
 
 export default defineComponent({
@@ -15,17 +16,18 @@ export default defineComponent({
 			emit("focusout")
 		}
 
-		const borderStyle = computed(() => {
-			if (props.isDisabled) return "border-neutral-300"
-			if (props.hasError) return "border-danger-500"
-			if (props.isFilled) return "border-nav-black"
-			return "border-neutral-300"
-		})
+		const inputContainerStyle = computed(() =>
+			useInputContainerStyle(
+				props.isDisabled,
+				props.hasError,
+				props.isFilled
+			)
+		)
 
 		return {
 			htmlInputContainer,
 			handleFocusOut,
-			borderStyle,
+			inputContainerStyle,
 		}
 	},
 })
@@ -37,8 +39,7 @@ export default defineComponent({
 			`w-full px-4 flex items-center justify-center border relative
 			focus-within:outline focus-within:outline-brand-primary 
 			focus-within:outline-2`,
-			borderStyle,
-			isDisabled ? 'bg-neutral-0' : '',
+			inputContainerStyle,
 		]"
 		@focusout="handleFocusOut"
 		ref="htmlInputContainer"

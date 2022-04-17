@@ -1,4 +1,5 @@
 <script lang="ts">
+import useInputContainerStyle from "@/composables/input/useInputContainerStyle"
 import { computed, defineComponent } from "vue"
 
 export default defineComponent({
@@ -9,15 +10,16 @@ export default defineComponent({
 		hasError: Boolean,
 	},
 	setup(props) {
-		const borderStyle = computed(() => {
-			if (props.isDisabled) return "border-neutral-300"
-			if (props.hasError) return "border-danger-500"
-			if (props.isFilled) return "border-nav-black"
-			return "border-neutral-300"
-		})
+		const inputContainerStyle = computed(() =>
+			useInputContainerStyle(
+				props.isDisabled,
+				props.hasError,
+				props.isFilled
+			)
+		)
 
 		return {
-			borderStyle,
+			inputContainerStyle,
 		}
 	},
 })
@@ -27,9 +29,8 @@ export default defineComponent({
 	<div
 		:class="[
 			`w-full px-4 flex items-center justify-center border relative`,
-			borderStyle,
-			isDisabled ? 'bg-neutral-0' : '',
 			isFocused ? 'outline outline-2 outline-brand-primary' : '',
+			inputContainerStyle,
 		]"
 	>
 		<slot></slot>
