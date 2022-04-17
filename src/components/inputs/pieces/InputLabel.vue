@@ -12,7 +12,7 @@ export default defineComponent({
 <template>
 	<label
 		:class="[
-			'inline-block pl-4 mb-[3px]',
+			'inline-block pl-4 mb-[3px] whitespace-nowrap',
 			$attrs.for && !isDisabled ? 'cursor-pointer' : '',
 		]"
 	>
