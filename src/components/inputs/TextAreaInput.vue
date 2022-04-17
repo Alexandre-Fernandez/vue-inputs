@@ -42,7 +42,7 @@ export default defineComponent({
 			:is-disabled="disabled"
 		>
 			<InputItem
-				class="resize-none disabled:bg-neutral-0 disabled:text-secondary"
+				class="resize-none my-3 disabled:bg-neutral-0 disabled:text-secondary"
 				:placeholder="placeholder"
 				:required="required"
 				:id="id"

@@ -72,7 +72,7 @@ export default defineComponent({
 <template>
 	<form class="bg-[#fff] px-6 py-20" v-if="isOpen">
 		<TextInput
-			class="input:my-[15px]"
+			class="input-base"
 			label="TextInput"
 			placeholder="Placeholder..."
 			v-model="textInputModel"
@@ -83,14 +83,14 @@ export default defineComponent({
 		<SecretInput
 			label="SecretInput"
 			placeholder="Password..."
-			class="input:my-[15px]"
+			class="input-base"
 			v-model="secretInputModel"
 			required
 		/>
 		<SelectInput
 			label="SelectInput"
 			placeholder="Select something..."
-			class="input:my-[15px]"
+			class="input-base"
 			v-model="selectInputModel.label"
 			v-model:itemData="selectInputModel.value"
 			:items="[
@@ -102,7 +102,7 @@ export default defineComponent({
 		<AutocompleteInput
 			label="AutocompleteInput"
 			placeholder="Type something..."
-			class="input:my-[15px]"
+			class="input-base"
 			v-model="autocompleteInputModel.label"
 			v-model:itemData="autocompleteInputModel.value"
 			:items="[
@@ -118,30 +118,29 @@ export default defineComponent({
 		<PhoneInput
 			label="PhoneInput"
 			placeholder="Placeholder..."
-			class="input:my-[15px]"
+			class="input-base"
 			v-model="phoneInputModel"
 			:prefixes="prefixes"
 		/>
 		<TextAreaInput
-			class="input:my-3"
 			label="TextAreaInput"
 			placeholder="Placeholder..."
 			v-model="textAreaInputModel"
 		/>
 		<CounterInput
-			class="input:my-2.5"
+			class="input-base"
 			v-model="counterInputModel"
 			:min-value="12"
 		/>
 		<CheckboxInput v-model="checkboxInputModel" label="CheckboxInput" />
 		<DatepickerInput
-			class="input:my-[15px]"
+			class="input-base"
 			label="DatepickerInput"
 			placeholder="Placeholder..."
 			v-model="datepickerInputModel"
 		/>
 		<NumberInput
-			class="input:my-[15px]"
+			class="input-base"
 			label="NumberInput"
 			placeholder="Placeholder..."
 			v-model="numberInputModel"
