@@ -116,21 +116,6 @@ export default defineComponent({
 </template>
 
 <style>
-/* General */
-
-/* root */
-:root {
-	--white: #fff;
-	--neutral-0: #f9f9f9;
-	--neutral-300: #d1d5db;
-	--brand-tertiary: #ff4b0e;
-	--danger-500: #ef4444;
-	--primary-100: #040c4e;
-	--secondary: #828282;
-	--success-500: #22c55e;
-	--success-700: #15803d;
-}
-
 /* dp__theme */
 .dp__theme_light,
 .dp__theme_dark {

@@ -4,6 +4,23 @@
 
 @tailwind utilities;
 
+@layer base {
+	/* root */
+	:root {
+		--white: #fff;
+		--neutral-0: #f9f9f9;
+		--neutral-300: #d1d5db;
+		--brand-primary: #502ebf;
+		--brand-secondary: #8a37bf;
+		--brand-tertiary: #ff4b0e;
+		--primary-100: #040c4e;
+		--secondary: #828282;
+		--success-500: #22c55e;
+		--success-700: #15803d;
+		--danger-500: #ef4444;
+	}
+}
+
 @layer components {
 	/* input-sm */
 	.input-sm {
