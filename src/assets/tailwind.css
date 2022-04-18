@@ -22,6 +22,9 @@
 }
 
 @layer components {
+	/*         Inputs */
+	/*     Sizes */
+
 	/* input-sm */
 	.input-sm {
 		@apply input:h-4 input:my-2.5;
@@ -37,11 +40,84 @@
 		@apply input:h-[22px] input:my-[13px];
 	}
 
+	/*     Styles */
+
 	/* input-label-l */
 	.input-label-l {
 		@apply flex items-center gap-2;
 	}
 	.input-label-l > label {
 		@apply mb-0 p-0;
+	}
+
+	/*         Buttons 	*/
+	/*     Sizes */
+
+	/* btn-h-xs */
+	.btn-h-xs {
+		@apply py-1.5;
+	}
+	/* btn-xs */
+	.btn-xs {
+		@apply btn-h-xs px-4;
+	}
+
+	/* btn-h-sm */
+	.btn-h-sm {
+		@apply py-2;
+	}
+	/* btn-sm */
+	.btn-sm {
+		@apply btn-h-sm px-4;
+	}
+
+	/* btn-h-base */
+	.btn-h-base {
+		@apply py-2.5;
+	}
+	/* btn-base */
+	.btn-base {
+		@apply btn-h-base px-4;
+	}
+
+	/* btn-h-lg */
+	.btn-h-lg {
+		@apply py-3;
+	}
+	/* btn-lg */
+	.btn-lg {
+		@apply btn-h-lg px-6;
+	}
+
+	/*     Styles */
+
+	/* btn-solid-blue */
+	.btn-solid-blue {
+		@apply rounded-button bg-primary-100 text-white;
+	}
+	/* btn-outline-blue */
+	.btn-outline-blue {
+		@apply rounded-button text-primary-100 bg-white border border-primary-100;
+	}
+
+	/* btn-outline-orange */
+	.btn-outline-orange {
+		@apply rounded-button border border-brand-tertiary text-brand-tertiary bg-white;
+	}
+
+	/* btn-outline-gradient */
+	.btn-outline-gradient-sm,
+	.btn-outline-gradient-base,
+	.btn-outline-gradient-lg {
+		@apply p-[1px] rounded-button bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-tertiary;
+	}
+	.btn-outline-gradient-sm > * {
+		@apply px-[15px] py-[7px] inline-block rounded-button bg-white;
+	}
+	.btn-outline-gradient-base > * {
+		@apply px-[15px] py-[9px] inline-block rounded-button bg-white;
+	}
+	.btn-outline-gradient-lg > * {
+		@apply px-[23px] py-[11px] inline-block rounded-button bg-white;
 	}
 }

@@ -14,8 +14,8 @@ import CounterInput from "./components/inputs/CounterInput.vue"
 import CheckboxInput from "./components/inputs/CheckboxInput.vue"
 import DatepickerInput from "./components/inputs/DatepickerInput.vue"
 import NumberInput from "./components/inputs/NumberInput.vue"
+import ToggleButton from "./components/buttons/ToggleButton.vue"
 
-// bg-[#282828]
 export default defineComponent({
 	components: {
 		TextInput,
@@ -31,6 +31,7 @@ export default defineComponent({
 		CheckboxInput,
 		DatepickerInput,
 		NumberInput,
+		ToggleButton,
 	},
 	setup() {
 		const isOpen = ref(true)
@@ -70,13 +71,12 @@ export default defineComponent({
 </script>
 
 <template>
-	<form class="bg-[#fff] px-6 py-20" v-if="isOpen">
+	<form class="bg-white px-6 py-20" v-if="isOpen">
 		<TextInput
 			class="input-base"
 			label="TextInput"
 			placeholder="Placeholder..."
 			v-model="textInputModel"
-			required
 		>
 			<template #icon><LetterIcon class="ml-0.5 mr-2" /></template>
 		</TextInput>
@@ -85,7 +85,6 @@ export default defineComponent({
 			placeholder="Password..."
 			class="input-base"
 			v-model="secretInputModel"
-			required
 		/>
 		<SelectInput
 			label="SelectInput"
@@ -126,6 +125,7 @@ export default defineComponent({
 			label="TextAreaInput"
 			placeholder="Placeholder..."
 			v-model="textAreaInputModel"
+			required
 		/>
 		<CounterInput
 			class="input-base"
@@ -146,6 +146,14 @@ export default defineComponent({
 			v-model="numberInputModel"
 			unit="%"
 		/>
+		<ToggleButton
+			class="block"
+			:active="{ class: 'btn-outline-gradient-base' }"
+			:inactive="{ class: 'btn-base btn-solid-blue', text: 'inactive' }"
+			type="button"
+		>
+			<template #active><span>active</span></template>
+		</ToggleButton>
 	</form>
 </template>
 
