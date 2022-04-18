@@ -22,8 +22,8 @@
 }
 
 @layer components {
-	/*         Inputs */
-	/*     Sizes */
+	/* Input */
+	/* ANCHOR 	Input sizes */
 
 	/* input-sm */
 	.input-sm {
@@ -40,7 +40,7 @@
 		@apply input:h-[22px] input:my-[13px];
 	}
 
-	/*     Styles */
+	/* ANCHOR 	Input styles */
 
 	/* input-label-l */
 	.input-label-l {
@@ -50,8 +50,8 @@
 		@apply mb-0 p-0;
 	}
 
-	/*         Buttons 	*/
-	/*     Sizes */
+	/* Button */
+	/* ANCHOR 	Button sizes */
 
 	/* btn-h-xs */
 	.btn-h-xs {
@@ -89,7 +89,7 @@
 		@apply btn-h-lg px-6;
 	}
 
-	/*     Styles */
+	/* ANCHOR 	Button styles */
 
 	/* btn-solid-blue */
 	.btn-solid-blue {

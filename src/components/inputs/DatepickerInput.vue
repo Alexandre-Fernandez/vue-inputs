@@ -142,7 +142,8 @@ export default defineComponent({
 	--dp-tooltip-color: var(--neutral-0);
 	--dp-disabled-color-text: var(--neutral-300);
 }
-/*     Input */
+
+/* ANCHOR 	Input */
 
 /* dp__main */
 .dp__main {
@@ -173,7 +174,8 @@ export default defineComponent({
 .dp__input_icon_pad {
 	padding-left: 0;
 }
-/*     Calendar */
+
+/* ANCHOR 	Calendar */
 
 /* dp__menu */
 .dp__menu {
@@ -208,7 +210,8 @@ export default defineComponent({
 	background-color: var(--brand-tertiary);
 	border: 0;
 }
-/*     Buttons */
+
+/* ANCHOR 	Calendar buttons */
 
 /* dp__action_row */
 .dp__action_row {
